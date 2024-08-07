@@ -48,6 +48,10 @@ public class Lixo_script : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
         canRespawn = false; 
     }
 
+    private void OnEnable()
+    {
+        Respawn();
+    }
 
     [ContextMenu("Randomize Type")]
     void ChangeType()
@@ -80,10 +84,16 @@ public class Lixo_script : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
     }
 
     public void Respawn()
-    {
-
+    {       
         if (!canRespawn) return;
 
+        ChangeType();
+
+        transform.position = new Vector2(Random.Range(-2.3f, 2.3f), 6);
+    }
+
+    public void CheckPoints()
+    {
         float xDistance = 10;
         float x2Distance = 10;
 
@@ -91,7 +101,7 @@ public class Lixo_script : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
         {
             xDistance = transform.position.x - lixeira_1.transform.position.x;
             xDistance = Mathf.Abs(xDistance);
-            print($"xDistance {xDistance}");
+            // print($"xDistance {xDistance}");
 
         }
 
@@ -99,12 +109,12 @@ public class Lixo_script : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
         {
             x2Distance = transform.position.x - lixeira_2.transform.position.x;
             x2Distance = Mathf.Abs(x2Distance);
-            print($"x2Distance {x2Distance}");
+            // print($"x2Distance {x2Distance}");
 
-        }             
+        }
 
-       
-        if(x2Distance > xDistance)
+
+        if (x2Distance > xDistance)
         {
             if (lixeira_1 != null)
             {
@@ -114,7 +124,8 @@ public class Lixo_script : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
                 }
             }
 
-        }else if (x2Distance < xDistance)
+        }
+        else if (x2Distance < xDistance)
         {
             if (lixeira_2 != null)
             {
@@ -125,7 +136,7 @@ public class Lixo_script : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
             }
 
         }
-        else if(x2Distance==xDistance)
+        else if (x2Distance == xDistance)
         {
 
             if (lixeira_1 != null)
@@ -135,21 +146,20 @@ public class Lixo_script : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
                     GameManager.Instance.ChangePoint(10);
                 }
             }
-            else if(lixeira_2 != null)
+            else if (lixeira_2 != null)
             {
                 if (lixeira_2.GetLixeiraType().ToString() == tipoDeLixo.ToString())
                 {
                     GameManager.Instance.ChangePoint(10);
                 }
             }
-            
+
         }
 
 
-        ChangeType();
-
-        transform.position = new Vector2(Random.Range(-2.3f, 2.3f), 6);
+        Respawn();
     }
+
 
     public void OnDrag(PointerEventData eventData)
     {
@@ -300,7 +310,10 @@ public class Lixo_script : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
     {
         if (collision.CompareTag("EndLine"))
         {
-            Respawn();
+            if (!canRespawn) return;
+
+            CheckPoints();
+            gameObject.SetActive(false); 
         }
 
     }
@@ -309,7 +322,10 @@ public class Lixo_script : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
     {
         if (collision.CompareTag("EndLine"))
         {
-            Respawn();
+            if (!canRespawn) return;
+
+            CheckPoints();
+            gameObject.SetActive(false);
         }
     }
 

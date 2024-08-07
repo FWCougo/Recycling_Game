@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-
-
 public class GameManager : MonoBehaviour
 {
     [SerializeField] TMP_Text points_txt;
