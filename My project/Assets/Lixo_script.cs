@@ -87,6 +87,7 @@ public class Lixo_script : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
     {       
         if (!canRespawn) return;
 
+        
         ChangeType();
 
         transform.position = new Vector2(Random.Range(-2.3f, 2.3f), 6);
@@ -101,7 +102,6 @@ public class Lixo_script : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
         {
             xDistance = transform.position.x - lixeira_1.transform.position.x;
             xDistance = Mathf.Abs(xDistance);
-            // print($"xDistance {xDistance}");
 
         }
 
@@ -109,7 +109,6 @@ public class Lixo_script : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
         {
             x2Distance = transform.position.x - lixeira_2.transform.position.x;
             x2Distance = Mathf.Abs(x2Distance);
-            // print($"x2Distance {x2Distance}");
 
         }
 
@@ -120,8 +119,10 @@ public class Lixo_script : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
             {
                 if (lixeira_1.GetLixeiraType().ToString() == tipoDeLixo.ToString())
                 {
+                    lixeira_1.ChangeScale();
                     GameManager.Instance.ChangePoint(10);
                 }
+                else { GameManager.Instance.GameOver(); }
             }
 
         }
@@ -131,8 +132,10 @@ public class Lixo_script : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
             {
                 if (lixeira_2.GetLixeiraType().ToString() == tipoDeLixo.ToString())
                 {
+                    lixeira_2.ChangeScale();
                     GameManager.Instance.ChangePoint(10);
                 }
+                else { GameManager.Instance.GameOver(); }
             }
 
         }
@@ -143,15 +146,19 @@ public class Lixo_script : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
             {
                 if (lixeira_1.GetLixeiraType().ToString() == tipoDeLixo.ToString())
                 {
+                    lixeira_1.ChangeScale();
                     GameManager.Instance.ChangePoint(10);
                 }
+                else { GameManager.Instance.GameOver(); }
             }
             else if (lixeira_2 != null)
             {
                 if (lixeira_2.GetLixeiraType().ToString() == tipoDeLixo.ToString())
                 {
+                    lixeira_2.ChangeScale();
                     GameManager.Instance.ChangePoint(10);
                 }
+                else { GameManager.Instance.GameOver(); }
             }
 
         }

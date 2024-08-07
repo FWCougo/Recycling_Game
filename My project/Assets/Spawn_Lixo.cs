@@ -7,6 +7,9 @@ public class Spawn_Lixo : MonoBehaviour
     public List<Lixo_script> pooledObjects;
     public Lixo_script objectToPool;
     public int amountToPool;
+    public float intervalo;
+
+    public bool spawning;
 
     void Start()
     {
@@ -19,6 +22,12 @@ public class Spawn_Lixo : MonoBehaviour
             pooledObjects.Add(tmp);
         }
 
+        
+    }
+
+    public void Iniciar()
+    {
+        spawning = true;
         StartCoroutine(SpawnLixo());
     }
 
@@ -35,24 +44,19 @@ public class Spawn_Lixo : MonoBehaviour
         return null;
     }
 
-    public float intervalo;
-
-    public bool spawning;
 
     IEnumerator SpawnLixo()
     {
         while (spawning)
         {
-            yield return new WaitForSeconds(intervalo);
-
-            print("Spawned");
-
             Lixo_script _Lixo = GetPooledObject();
             if(_Lixo != null )
             {
                 _Lixo.gameObject.SetActive(true);
                 _Lixo.Respawn();
             }
+
+            yield return new WaitForSeconds(intervalo);
 
             yield return null;
         }
