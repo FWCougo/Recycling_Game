@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5560592404165904655}
   - component: {fileID: 5560592404165904652}
   - component: {fileID: 5560592404165904653}
-  - component: {fileID: 5560592404165904654}
+  - component: {fileID: 2955140799994118711}
   m_Layer: 0
   m_Name: Lixo
   m_TagString: Untagged
@@ -26,13 +26,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5560592404165904642}
-  serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -2.17, y: 0.56, z: 0}
   m_LocalScale: {x: 0.9, y: 0.9, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &5560592404165904652
 SpriteRenderer:
@@ -102,7 +102,7 @@ MonoBehaviour:
   fallSpeed: 1
   canRespawn: 1
   cam: {fileID: 0}
-  col: {fileID: 5560592404165904654}
+  col: {fileID: 2955140799994118711}
   mainSprite: {fileID: 5560592404165904652}
   retrieveImage:
     metal_img:
@@ -132,8 +132,8 @@ MonoBehaviour:
     maxDepth: 0
     minNormalAngle: 0
     maxNormalAngle: 0
---- !u!61 &5560592404165904654
-BoxCollider2D:
+--- !u!60 &2955140799994118711
+PolygonCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -142,26 +142,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -174,6 +155,14 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1}
-  m_EdgeRadius: 0
+  m_Points:
+    m_Paths:
+    - - {x: -0.16235293, y: 0.49588233}
+      - {x: -0.4535294, y: 0.39470586}
+      - {x: -0.4535294, y: -0.19588235}
+      - {x: -0.2052941, y: -0.4752941}
+      - {x: 0.2652941, y: -0.4752941}
+      - {x: 0.43764704, y: -0.4317647}
+      - {x: 0.44823527, y: -0.35470587}
+      - {x: 0.44823527, y: 0.35235292}
+      - {x: 0.32764706, y: 0.49588233}

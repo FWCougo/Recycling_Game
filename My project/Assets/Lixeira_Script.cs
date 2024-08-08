@@ -15,7 +15,7 @@ public class Lixeira_Script : MonoBehaviour
     public void ChangeScale()
     {
         Vector3 tempScale = lixo_go.localScale;
-        lixo_go.DOScale(scale_Change, 1).OnComplete(()=> lixo_go.DOScale(tempScale, 1));
+        lixo_go.DOScale(scale_Change, .5f).OnComplete(()=> lixo_go.DOScale(tempScale, .5f));
     }
 
     public BoxCollider2D Collider()

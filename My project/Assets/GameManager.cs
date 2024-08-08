@@ -12,7 +12,6 @@ public class GameManager : MonoBehaviour
 
     public static GameManager Instance;
 
-
     [SerializeField] Spawn_Lixo spawn_Lixo;
 
     [SerializeField] int level;
@@ -44,6 +43,7 @@ public class GameManager : MonoBehaviour
 
     public void RestarGame()
     {
+        won = false;
         SceneManager.LoadScene(0);        
     }
 
@@ -112,7 +112,7 @@ public class GameManager : MonoBehaviour
             return;
         }
 
-        if (points > 175)
+        if (points > 175 && points < 250)
         {
             if (level != 4)
             {
@@ -128,12 +128,27 @@ public class GameManager : MonoBehaviour
             return;
         }
 
+        if (points >= 250)
+        {
+            if (level != 5)
+            {
+                won = true;
+                spawn_Lixo.spawning = false;
+                win_menu.SetActive(true);
+                level = 5;
+            }
+        }
+
     }
 
+    bool won;
     [SerializeField] GameObject gameover_menu;
+    [SerializeField] GameObject win_menu;
+    [SerializeField] GameObject game_menu;
 
     public void GameOver()
     {
+        if (won) return;
         gameover_menu.SetActive(true);
 
         if (points > max_Points)
