@@ -16,6 +16,12 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] int level;
     
+    public void StartGame()
+    {
+        game_menu.SetActive(true);
+        spawn_Lixo.Iniciar();
+    }
+
     public float LixoFallSpeed()
     {
         if (points > 50 && points < 100)
@@ -38,7 +44,7 @@ public class GameManager : MonoBehaviour
             return 3;
         }
 
-        return 1;
+        return 1.3f;
     }
 
     public void RestarGame()
@@ -68,7 +74,7 @@ public class GameManager : MonoBehaviour
         {
             if (level != 1)
             {
-                spawn_Lixo.intervalo = 3;
+                spawn_Lixo.intervalo = 2.5f;
                 foreach(Lixo_script _lixo in spawn_Lixo.pooledObjects)
                 {
                     _lixo.fallSpeed = LixoFallSpeed();
@@ -134,9 +140,35 @@ public class GameManager : MonoBehaviour
             {
                 won = true;
                 spawn_Lixo.spawning = false;
+                tutorialInGame_menu.SetActive(false);
+                game_menu.SetActive(false);
                 win_menu.SetActive(true);
                 level = 5;
             }
+        }
+
+    }
+
+    [SerializeField] private bool isPaused;
+
+    public void Pause()
+    {
+        isPaused = !isPaused;
+
+        switch (isPaused)
+        {
+            case true:
+                Time.timeScale = 0;
+                tutorialInGame_menu.SetActive(true);
+                game_menu.SetActive(false);
+                break;
+
+
+            case false:
+                Time.timeScale = 1;
+                tutorialInGame_menu.SetActive(false);
+                game_menu.SetActive(true);
+                break;
         }
 
     }
@@ -145,10 +177,13 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject gameover_menu;
     [SerializeField] GameObject win_menu;
     [SerializeField] GameObject game_menu;
+    [SerializeField] GameObject tutorialInGame_menu;
 
     public void GameOver()
     {
         if (won) return;
+        game_menu.SetActive(false);
+        tutorialInGame_menu.SetActive(false);
         gameover_menu.SetActive(true);
 
         if (points > max_Points)
